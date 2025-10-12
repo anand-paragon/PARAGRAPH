@@ -56,7 +56,7 @@ export default class extends Workflow<
       description: 'description',
       method: 'GET',
       url: `/contact/5513?=`,
-      params: { [``]: `` },
+      params: { '': `` },
       headers: { value: `` },
     });
 

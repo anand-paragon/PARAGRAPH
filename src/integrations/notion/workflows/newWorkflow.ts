@@ -1,27 +1,21 @@
-import {
-  EventStep,
-  FanOutStep,
-  FunctionStep,
-  Workflow,
-} from '@useparagon/core';
+import { UnselectedStep, Workflow } from '@useparagon/core';
 import { IContext } from '@useparagon/core/execution';
 import { IPersona } from '@useparagon/core/persona';
 import { ConditionalInput } from '@useparagon/core/steps/library/conditional';
 import { IConnectUser, IPermissionContext } from '@useparagon/core/user';
 import {
   createInputs,
-  INetsuiteIntegration,
+  INotionIntegration,
   InputResultMap,
-} from '@useparagon/integrations/netsuite';
+} from '@useparagon/integrations/notion';
 
-import event from '../../../events/net';
 import personaMeta from '../../../persona.meta';
 
 /**
- * action Workflow implementation
+ * New Workflow Workflow implementation
  */
 export default class extends Workflow<
-  INetsuiteIntegration,
+  INotionIntegration,
   IPersona<typeof personaMeta>,
   InputResultMap
 > {
@@ -29,48 +23,25 @@ export default class extends Workflow<
    * Define workflow steps and orchestration.
    */
   define(
-    integration: INetsuiteIntegration,
+    integration: INotionIntegration,
     context: IContext<InputResultMap>,
     connectUser: IConnectUser<IPersona<typeof personaMeta>>,
   ) {
-    const triggerStep = new EventStep(event);
+    const triggerStep = new UnselectedStep();
 
-    const functionStep = new FunctionStep({
-      autoRetry: false,
-      description: 'description',
-      code: function yourFunction(parameters, libraries) {
-        return new Array(50).fill(1);
-      },
-      parameters: {},
-    });
-
-    const mapStep = new FanOutStep({
-      description: 'description',
-      iterator: functionStep.output.result,
-    });
-
-    const actionStep = integration.actions.getVendorById(
-      { recordType: 'vendor', vendorId: `5524` },
-      {
-        autoRetry: false,
-        continueWorkflowOnError: false,
-        description: 'description',
-      },
-    );
-
-    triggerStep.nextStep(functionStep).nextStep(mapStep.branch(actionStep));
+    triggerStep;
 
     /**
      * Pass all steps used in the workflow to the `.register()`
      * function. The keys used in this function must remain stable.
      */
-    return this.register({ triggerStep, functionStep, mapStep, actionStep });
+    return this.register({ triggerStep });
   }
 
   /**
    * The name of the workflow, used in the Dashboard and Connect Portal.
    */
-  name: string = 'action';
+  name: string = 'New Workflow';
 
   /**
    * A user-facing description of the workflow shown in the Connect Portal.
@@ -112,5 +83,5 @@ export default class extends Workflow<
   /**
    * This property is maintained by Paragon. Do not edit this property.
    */
-  readonly id: string = '9226b77e-6727-4402-93bf-873bd05ca1e9';
+  readonly id: string = 'd99e9684-d854-4751-9dec-8f7f31fe93c3';
 }

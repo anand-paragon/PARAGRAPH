@@ -54,7 +54,7 @@ export default class extends Workflow<
       description: 'description',
       url: `https://example.com?anand=chaudhar`,
       method: 'GET',
-      params: { [`anand`]: `chaudhar` },
+      params: { anand: `chaudhar` },
       headers: {},
     });
 
