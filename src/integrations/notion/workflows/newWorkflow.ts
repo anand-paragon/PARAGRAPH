@@ -1,4 +1,4 @@
-import { UnselectedStep, Workflow } from '@useparagon/core';
+import { CronStep, Workflow } from '@useparagon/core';
 import { IContext } from '@useparagon/core/execution';
 import { IPersona } from '@useparagon/core/persona';
 import { ConditionalInput } from '@useparagon/core/steps/library/conditional';
@@ -27,15 +27,27 @@ export default class extends Workflow<
     context: IContext<InputResultMap>,
     connectUser: IConnectUser<IPersona<typeof personaMeta>>,
   ) {
-    const triggerStep = new UnselectedStep();
+    const triggerStep = new CronStep({
+      cron: '0 0 9 */1 * *',
+      timeZone: 'America/Los_Angeles',
+    });
 
-    triggerStep;
+    const actionStep = integration.actions.createPageWithMarkdown(
+      { parent: `` },
+      {
+        autoRetry: false,
+        continueWorkflowOnError: false,
+        description: 'description',
+      },
+    );
+
+    triggerStep.nextStep(actionStep);
 
     /**
      * Pass all steps used in the workflow to the `.register()`
      * function. The keys used in this function must remain stable.
      */
-    return this.register({ triggerStep });
+    return this.register({ triggerStep, actionStep });
   }
 
   /**

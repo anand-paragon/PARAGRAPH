@@ -1,4 +1,4 @@
-import { FunctionStep, UnselectedStep, Workflow } from '@useparagon/core';
+import { CronStep, FunctionStep, Workflow } from '@useparagon/core';
 import { IContext } from '@useparagon/core/execution';
 import { IPersona } from '@useparagon/core/persona';
 import { ConditionalInput } from '@useparagon/core/steps/library/conditional';
@@ -27,24 +27,39 @@ export default class extends Workflow<
     context: IContext<InputResultMap>,
     connectUser: IConnectUser<IPersona<typeof personaMeta>>,
   ) {
-    const triggerStep = new UnselectedStep();
+    const triggerStep = new CronStep({
+      cron: '0 0 9 * * 3',
+      timeZone: 'America/Los_Angeles',
+    });
 
-    const functionStepStep = new FunctionStep({
+    const functionStep = new FunctionStep({
       autoRetry: false,
-      description: 'Function Step',
+      description: 'Find start and end date',
       code: function yourFunction(parameters, libraries) {
-        return 'hello world';
+        const end = Date.now();
+        const start = end - 7 * 24 * 60 * 60 * 1000;
+        return {
+          start,
+          end,
+        };
       },
       parameters: {},
     });
 
-    triggerStep.nextStep(functionStepStep);
+    const functionStep1 = new FunctionStep({
+      autoRetry: false,
+      description: 'list repositories which needs to be monitored',
+      code: function yourFunction(parameters, libraries) {},
+      parameters: {},
+    });
+
+    triggerStep.nextStep(functionStep).nextStep(functionStep1);
 
     /**
      * Pass all steps used in the workflow to the `.register()`
      * function. The keys used in this function must remain stable.
      */
-    return this.register({ triggerStep, functionStepStep });
+    return this.register({ triggerStep, functionStep, functionStep1 });
   }
 
   /**
