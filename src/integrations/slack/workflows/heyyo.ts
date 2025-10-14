@@ -1,4 +1,10 @@
-import { CronStep, FunctionStep, Workflow } from '@useparagon/core';
+import {
+  CronStep,
+  FanOutStep,
+  FunctionStep,
+  RequestStep,
+  Workflow,
+} from '@useparagon/core';
 import { IContext } from '@useparagon/core/execution';
 import { IPersona } from '@useparagon/core/persona';
 import { ConditionalInput } from '@useparagon/core/steps/library/conditional';
@@ -49,17 +55,53 @@ export default class extends Workflow<
     const functionStep1 = new FunctionStep({
       autoRetry: false,
       description: 'list repositories which needs to be monitored',
-      code: function yourFunction(parameters, libraries) {},
+      code: function yourFunction(parameters, libraries) {
+        return [
+          'paragon',
+          // "connect",
+          // "paragraph",
+          // "managed-sync",
+          // "health-checker",
+          // "inner-circle",
+          // "atlas-v2-poc",
+          // "on-prem",
+          // "enterprise",
+        ];
+      },
       parameters: {},
     });
 
-    triggerStep.nextStep(functionStep).nextStep(functionStep1);
+    const mapStep = new FanOutStep({
+      description: 'Iterate each repository',
+      iterator: functionStep1.output.result,
+    });
+
+    const requestStep = new RequestStep({
+      autoRetry: false,
+      continueWorkflowOnError: false,
+      description: 'List pull requests',
+      url: `https://api.github.com/repos/useparagon/${mapStep.output.instance}/pulls`,
+      method: 'GET',
+      params: {},
+      headers: { Authorization: `Bearer ` },
+    });
+
+    triggerStep
+      .nextStep(functionStep)
+      .nextStep(functionStep1)
+      .nextStep(mapStep.branch(requestStep));
 
     /**
      * Pass all steps used in the workflow to the `.register()`
      * function. The keys used in this function must remain stable.
      */
-    return this.register({ triggerStep, functionStep, functionStep1 });
+    return this.register({
+      triggerStep,
+      functionStep,
+      functionStep1,
+      mapStep,
+      requestStep,
+    });
   }
 
   /**
