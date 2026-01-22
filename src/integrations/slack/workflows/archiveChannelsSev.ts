@@ -32,13 +32,24 @@ export default class extends Workflow<
       objectMapping: ``,
     });
 
-    triggerStep;
+    const actionStep = undefined;
+
+    const actionStep1 = integration.actions.searchMessages(
+      { query: `type=public` },
+      {
+        autoRetry: false,
+        continueWorkflowOnError: false,
+        description: 'description',
+      },
+    );
+
+    triggerStep.nextStep(actionStep).nextStep(actionStep1);
 
     /**
      * Pass all steps used in the workflow to the `.register()`
      * function. The keys used in this function must remain stable.
      */
-    return this.register({ triggerStep });
+    return this.register({ triggerStep, actionStep, actionStep1 });
   }
 
   /**
