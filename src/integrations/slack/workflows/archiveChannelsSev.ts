@@ -1,4 +1,4 @@
-import { EventStep, Workflow } from '@useparagon/core';
+import { EventStep, IntegrationRequestStep, Workflow } from '@useparagon/core';
 import { IContext } from '@useparagon/core/execution';
 import { IPersona } from '@useparagon/core/persona';
 import { ConditionalInput } from '@useparagon/core/steps/library/conditional';
@@ -32,10 +32,19 @@ export default class extends Workflow<
       objectMapping: ``,
     });
 
-    const actionStep = undefined;
+    const integrationRequestStep = new IntegrationRequestStep({
+      autoRetry: false,
+      continueWorkflowOnError: false,
+      description: 'description',
+      method: 'GET',
+      url: `/conversations.list?types=public_channel&exclude_archived=true`,
+      params: {},
+      bodyType: 'json',
+      headers: {},
+    });
 
-    const actionStep1 = integration.actions.searchMessages(
-      { query: `type=public` },
+    const actionStep = integration.actions.searchMessages(
+      { query: `types=public_channel` },
       {
         autoRetry: false,
         continueWorkflowOnError: false,
@@ -43,13 +52,13 @@ export default class extends Workflow<
       },
     );
 
-    triggerStep.nextStep(actionStep).nextStep(actionStep1);
+    triggerStep.nextStep(integrationRequestStep).nextStep(actionStep);
 
     /**
      * Pass all steps used in the workflow to the `.register()`
      * function. The keys used in this function must remain stable.
      */
-    return this.register({ triggerStep, actionStep, actionStep1 });
+    return this.register({ triggerStep, integrationRequestStep, actionStep });
   }
 
   /**
