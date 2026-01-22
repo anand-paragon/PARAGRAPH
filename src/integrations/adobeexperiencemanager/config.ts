@@ -11,7 +11,7 @@ Our Adobe Experience Manager integration enables you to:
  
 • Create and update digital assets in your Adobe Experience Manager account
 • Search for digital assets in your Adobe Experience Manager account`,
-  showWatermark: true,
+  showWatermark: false,
   workflowDisplayOrder: [],
 };
 

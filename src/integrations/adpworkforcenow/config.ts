@@ -12,7 +12,7 @@ Our ADP Workforce Now integration enables you to:
 • Create or update workers in your ADP Workforce Now instance
 • Manage payroll within ADP Workforce Now
 • Sync workers from ADP Workforce Now`,
-  showWatermark: true,
+  showWatermark: false,
   workflowDisplayOrder: [],
 };
 

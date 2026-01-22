@@ -14,7 +14,7 @@ Our Stripe integration enables you to:
 • Automatically create or update customers in Stripe
 • Sync payments or transactions from Stripe
 • Receive updates when payments are made in Stripe`,
-  showWatermark: true,
+  showWatermark: false,
   workflowDisplayOrder: [],
 };
 

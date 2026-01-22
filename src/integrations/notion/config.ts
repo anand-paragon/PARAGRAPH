@@ -13,7 +13,7 @@ Our notion integration enables you to:
            
 • Sync data in pages and databases in your Notion workspace
 • Create and update page content in your Notion workspace`,
-  showWatermark: true,
+  showWatermark: false,
   workflowDisplayOrder: [NewWorkflow],
 };
 

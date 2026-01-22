@@ -12,7 +12,7 @@ Our Copper integration enables you to:
 • Create or update records in your Copper account
 • Sync records from your Copper account
 • Receive webhooks when records are created or updated in your Copper account`,
-  showWatermark: true,
+  showWatermark: false,
   workflowDisplayOrder: [],
 };
 

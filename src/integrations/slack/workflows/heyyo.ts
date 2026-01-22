@@ -35,7 +35,7 @@ export default class extends Workflow<
   ) {
     const triggerStep = new CronStep({
       cron: '0 0 9 * * 3',
-      timeZone: 'America/Los_Angeles',
+      timezone: 'America/Los_Angeles',
     });
 
     const functionStep = new FunctionStep({
@@ -83,6 +83,7 @@ export default class extends Workflow<
       url: `https://api.github.com/repos/useparagon/${mapStep.output.instance}/pulls`,
       method: 'GET',
       params: {},
+      bodyType: 'json',
       headers: { Authorization: `Bearer ` },
     });
 

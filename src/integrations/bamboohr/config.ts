@@ -12,7 +12,7 @@ Our BambooHR integration enables you to:
 • Sync employee information in your BambooHR account
 • Create employee time off requests in your BambooHR account
 • Receive updates when employee information is updated in your BambooHR account`,
-  showWatermark: true,
+  showWatermark: false,
   workflowDisplayOrder: [],
 };
 

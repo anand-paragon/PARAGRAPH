@@ -12,7 +12,7 @@ Our Jira integration enables you to:
 • Automatically create or update issues in Jira
 • Sync issues from Jira
 • Receive updates when issues are created or updated in Jira`,
-  showWatermark: true,
+  showWatermark: false,
   workflowDisplayOrder: [],
 };
 

@@ -12,7 +12,7 @@ Our PagerDuty integration enables you to:
 • Add and configure users on your PagerDuty account
 • Automatically create incidents within PagerDuty
 • Sync incidents across your apps`,
-  showWatermark: true,
+  showWatermark: false,
   workflowDisplayOrder: [],
 };
 

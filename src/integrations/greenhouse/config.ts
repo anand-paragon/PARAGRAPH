@@ -12,7 +12,7 @@ Our Greenhouse integration enables you to:
 • Manage candidates applications in your Greenhouse account
 • Sync candidates in your Greenhouse account
 • Fetch jobs in your Greenhouse account`,
-  showWatermark: true,
+  showWatermark: false,
   workflowDisplayOrder: [],
 };
 

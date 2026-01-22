@@ -40,6 +40,7 @@ export default class extends Workflow<
       method: 'GET',
       url: ``,
       params: {},
+      bodyType: 'json',
       headers: {},
     });
 

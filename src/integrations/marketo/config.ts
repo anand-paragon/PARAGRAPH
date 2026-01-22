@@ -11,7 +11,7 @@ Our Marketo integration enables you to:
     
 • Automatically create or update leads in Marketo
 • Add leads to lists in Marketo`,
-  showWatermark: true,
+  showWatermark: false,
   workflowDisplayOrder: [],
 };
 

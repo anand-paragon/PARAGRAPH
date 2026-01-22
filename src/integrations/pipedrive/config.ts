@@ -15,7 +15,7 @@ Our Pipedrive integration enables you to:
 • Automatically create or update records like contacts or deals in Pipedrive
 • Sync records from Pipedrive
 • Receive updates when new records are created in Pipedrive`,
-  showWatermark: true,
+  showWatermark: false,
   workflowDisplayOrder: [NewWorkflow, PipedriveIntegrationEnabled],
 };
 

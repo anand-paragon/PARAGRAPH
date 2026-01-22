@@ -13,7 +13,7 @@ Our Amazon S3 integration enables you to:
            
 • Sync buckets in your Amazon S3 account 
 • Create and update buckets, objects and jobs in your Amazon S3 account`,
-  showWatermark: true,
+  showWatermark: false,
   workflowDisplayOrder: [NewWorkflow],
 };
 

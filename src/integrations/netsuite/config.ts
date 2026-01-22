@@ -16,7 +16,7 @@ Our NetSuite integration enables you to:
   
 • Create or update purchase orders in NetSuite automatically
 • Sync vendor information between your app and NetSuite`,
-  showWatermark: true,
+  showWatermark: false,
   workflowDisplayOrder: [
     Action,
     IntegrationRequest,

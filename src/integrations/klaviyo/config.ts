@@ -17,7 +17,7 @@ Our Klaviyo integration enables you to:
 • Automatically add new subscribers to lists or campaigns in Klaviyo
 • Create or manage lists or campaigns in Klaviyo
 • Sync subscribers from Klaviyo lists`,
-  showWatermark: true,
+  showWatermark: false,
   workflowDisplayOrder: [NewWorkflow, NewWorkflow_1],
 };
 

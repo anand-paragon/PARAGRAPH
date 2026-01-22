@@ -12,7 +12,7 @@ Our Monday.com integration enables you to:
 • Automatically create or update items in Monday.com
 • Sync items from Monday.com
 • Receive updates when items are created or updated in Monday.com`,
-  showWatermark: true,
+  showWatermark: false,
   workflowDisplayOrder: [],
 };
 

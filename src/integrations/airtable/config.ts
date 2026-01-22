@@ -12,7 +12,7 @@ Our Airtable integration enables you to:
 • Create or update records in your Airtable bases
 • Sync records from your Airtable bases
 • Receive webhooks when records are created or updated in your Airtable bases`,
-  showWatermark: true,
+  showWatermark: false,
   workflowDisplayOrder: [],
 };
 

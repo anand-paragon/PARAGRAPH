@@ -11,7 +11,7 @@ Our Azure DevOps integration enables you to:
   
 • Automatically create or update work items in Azure DevOps
 • Receive updates when a work item is created or updated in Azure DevOps`,
-  showWatermark: true,
+  showWatermark: false,
   workflowDisplayOrder: [],
 };
 

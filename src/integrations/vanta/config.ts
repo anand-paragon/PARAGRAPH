@@ -12,7 +12,7 @@ Our Vanta integration enables you to:
 • Download or upload documents in your Vanta account
 • Manage policies in your Vanta account
 • Query test results in your Vanta account`,
-  showWatermark: true,
+  showWatermark: false,
   workflowDisplayOrder: [],
 };
 

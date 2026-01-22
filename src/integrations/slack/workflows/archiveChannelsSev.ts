@@ -1,27 +1,22 @@
-import {
-  EventStep,
-  FunctionStep,
-  RequestStep,
-  Workflow,
-} from '@useparagon/core';
+import { EventStep, Workflow } from '@useparagon/core';
 import { IContext } from '@useparagon/core/execution';
 import { IPersona } from '@useparagon/core/persona';
 import { ConditionalInput } from '@useparagon/core/steps/library/conditional';
 import { IConnectUser, IPermissionContext } from '@useparagon/core/user';
 import {
   createInputs,
-  IKlaviyoIntegration,
   InputResultMap,
-} from '@useparagon/integrations/klaviyo';
+  ISlackIntegration,
+} from '@useparagon/integrations/slack';
 
-import event from '../../../events/net';
+import event from '../../../events/archiveSevChannels';
 import personaMeta from '../../../persona.meta';
 
 /**
- * New Workflow Workflow implementation
+ * archive channels sev Workflow implementation
  */
 export default class extends Workflow<
-  IKlaviyoIntegration,
+  ISlackIntegration,
   IPersona<typeof personaMeta>,
   InputResultMap
 > {
@@ -29,43 +24,27 @@ export default class extends Workflow<
    * Define workflow steps and orchestration.
    */
   define(
-    integration: IKlaviyoIntegration,
+    integration: ISlackIntegration,
     context: IContext<InputResultMap>,
     connectUser: IConnectUser<IPersona<typeof personaMeta>>,
   ) {
-    const triggerStep = new EventStep(event);
-
-    const functionStep = new FunctionStep({
-      autoRetry: false,
-      description: 'description',
-      code: function yourFunction(parameters, libraries) {},
-      parameters: {},
+    const triggerStep = new EventStep(event, {
+      objectMapping: ``,
     });
 
-    const requestStep = new RequestStep({
-      autoRetry: false,
-      continueWorkflowOnError: false,
-      description: 'description',
-      url: `https://example.com`,
-      method: 'GET',
-      params: {},
-      bodyType: 'json',
-      headers: {},
-    });
-
-    triggerStep.nextStep(functionStep).nextStep(requestStep);
+    triggerStep;
 
     /**
      * Pass all steps used in the workflow to the `.register()`
      * function. The keys used in this function must remain stable.
      */
-    return this.register({ triggerStep, functionStep, requestStep });
+    return this.register({ triggerStep });
   }
 
   /**
    * The name of the workflow, used in the Dashboard and Connect Portal.
    */
-  name: string = 'New Workflow';
+  name: string = 'archive channels sev';
 
   /**
    * A user-facing description of the workflow shown in the Connect Portal.
@@ -107,5 +86,5 @@ export default class extends Workflow<
   /**
    * This property is maintained by Paragon. Do not edit this property.
    */
-  readonly id: string = '82cab444-c2dc-482b-b2b3-53740608d4b8';
+  readonly id: string = 'b9885088-002d-450a-a0a3-4dc4b2fc1ff9';
 }

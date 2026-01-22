@@ -36,7 +36,7 @@ export default class extends Workflow<
   ) {
     const triggerStep = new CronStep({
       cron: '0 0 9 */1 * *',
-      timeZone: 'America/Los_Angeles',
+      timezone: 'America/Los_Angeles',
     });
 
     const functionStep = new FunctionStep({
@@ -55,6 +55,7 @@ export default class extends Workflow<
       url: `https://example.com?anand=chaudhar`,
       method: 'GET',
       params: { anand: `chaudhar` },
+      bodyType: 'json',
       headers: {},
     });
 

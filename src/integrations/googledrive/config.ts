@@ -11,7 +11,7 @@ Our Google Drive integration enables you to:
        
 • Save files to your Google Drive
 • Sync files from your Google Drive`,
-  showWatermark: true,
+  showWatermark: false,
   workflowDisplayOrder: [],
 };
 

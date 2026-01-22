@@ -12,7 +12,7 @@ Paragon enables you to sync data between your app and your users’ Asana accoun
 • Create or update tasks in your users’ Asana projects
 • Sync tasks from your users’ Asana projects
 • Receive webhooks when tasks are created or updated in your users’ Asana projects`,
-  showWatermark: true,
+  showWatermark: false,
   workflowDisplayOrder: [],
 };
 
