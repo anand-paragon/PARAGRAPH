@@ -55,7 +55,6 @@ export default class extends Workflow<
       url: `https://example.com?anand=chaudhar`,
       method: 'GET',
       params: { anand: `chaudhar` },
-      bodyType: 'json',
       headers: {},
     });
 

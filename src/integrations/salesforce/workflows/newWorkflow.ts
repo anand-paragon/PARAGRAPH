@@ -29,7 +29,14 @@ export default class extends Workflow<
   ) {
     const triggerStep = undefined;
 
-    const actionStep = undefined;
+    const actionStep = integration.actions.searchRecordsV2(
+      {},
+      {
+        autoRetry: false,
+        continueWorkflowOnError: false,
+        description: 'description',
+      },
+    );
 
     triggerStep.nextStep(actionStep);
 

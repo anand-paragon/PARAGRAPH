@@ -39,7 +39,6 @@ export default class extends Workflow<
       method: 'GET',
       url: `/conversations.list?types=public_channel&exclude_archived=true`,
       params: {},
-      bodyType: 'json',
       headers: {},
     });
 

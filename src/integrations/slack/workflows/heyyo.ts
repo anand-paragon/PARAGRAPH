@@ -83,7 +83,6 @@ export default class extends Workflow<
       url: `https://api.github.com/repos/useparagon/${mapStep.output.instance}/pulls`,
       method: 'GET',
       params: {},
-      bodyType: 'json',
       headers: { Authorization: `Bearer ` },
     });
 
