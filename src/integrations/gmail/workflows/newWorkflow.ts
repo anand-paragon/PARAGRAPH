@@ -1,15 +1,33 @@
-import { Workflow } from '@useparagon/core';
 import { IContext } from '@useparagon/core/execution';
+import {
+  Workflow,
+  CronStep,
+  DelayStep,
+  EventStep,
+  FunctionStep,
+  ConditionalStep,
+  FanOutStep,
+  ResponseStep,
+  RequestStep,
+  IntegrationEnabledStep,
+  UnselectedStep,
+  EndpointStep,
+  IntegrationRequestStep,
+  ICustomIntegration,
+  CustomTriggerStep,
+} from '@useparagon/core';
 import { IPersona } from '@useparagon/core/persona';
+import * as Operators from '@useparagon/core/operator';
 import { ConditionalInput } from '@useparagon/core/steps/library/conditional';
 import { IConnectUser, IPermissionContext } from '@useparagon/core/user';
 import {
   createInputs,
-  IGmailIntegration,
   InputResultMap,
+  IGmailIntegration,
 } from '@useparagon/integrations/gmail';
 
 import personaMeta from '../../../persona.meta';
+import sharedInputs from '../inputs';
 
 /**
  * New Workflow Workflow implementation
@@ -27,15 +45,33 @@ export default class extends Workflow<
     context: IContext<InputResultMap>,
     connectUser: IConnectUser<IPersona<typeof personaMeta>>,
   ) {
-    const triggerStep = undefined;
+    const triggerStep = integration.triggers.threadCreated({
+      objectMapping: ``,
+    });
 
-    triggerStep;
+    const actionStep = integration.actions.getEmailById(
+      { messageId: `${triggerStep.output.result.id}` },
+      {
+        autoRetry: false,
+        continueWorkflowOnError: false,
+        description: 'description',
+      },
+    );
+
+    const functionStep = new FunctionStep({
+      autoRetry: false,
+      description: 'description',
+      code: function yourFunction(parameters, libraries) {},
+      parameters: {},
+    });
+
+    triggerStep.nextStep(actionStep).nextStep(functionStep);
 
     /**
      * Pass all steps used in the workflow to the `.register()`
      * function. The keys used in this function must remain stable.
      */
-    return this.register({ triggerStep });
+    return this.register({ triggerStep, actionStep, functionStep });
   }
 
   /**

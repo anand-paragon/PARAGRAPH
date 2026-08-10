@@ -23,17 +23,17 @@ import { IConnectUser, IPermissionContext } from '@useparagon/core/user';
 import {
   createInputs,
   InputResultMap,
-  IPipedriveIntegration,
-} from '@useparagon/integrations/pipedrive';
+  IZohocrmIntegration,
+} from '@useparagon/integrations/zohocrm';
 
 import personaMeta from '../../../persona.meta';
 import sharedInputs from '../inputs';
 
 /**
- * pipedrive integration enabled Workflow implementation
+ * New Workflow Workflow implementation
  */
 export default class extends Workflow<
-  IPipedriveIntegration,
+  IZohocrmIntegration,
   IPersona<typeof personaMeta>,
   InputResultMap
 > {
@@ -41,34 +41,37 @@ export default class extends Workflow<
    * Define workflow steps and orchestration.
    */
   define(
-    integration: IPipedriveIntegration,
+    integration: IZohocrmIntegration,
     context: IContext<InputResultMap>,
     connectUser: IConnectUser<IPersona<typeof personaMeta>>,
   ) {
-    const triggerStep = new IntegrationEnabledStep();
-
-    const functionStep = new FunctionStep({
-      autoRetry: false,
-      description: 'description',
-      code: function yourFunction(parameters, libraries) {},
-      parameters: {},
+    const triggerStep = new CronStep({
+      cron: '0 0 9 */1 * *',
+      timezone: 'America/Los_Angeles',
     });
 
-    const actionStep = undefined;
+    const actionStep = integration.actions.zohoCrmCreateRecord(
+      {},
+      {
+        autoRetry: false,
+        continueWorkflowOnError: false,
+        description: 'description',
+      },
+    );
 
-    triggerStep.nextStep(functionStep).nextStep(actionStep);
+    triggerStep.nextStep(actionStep);
 
     /**
      * Pass all steps used in the workflow to the `.register()`
      * function. The keys used in this function must remain stable.
      */
-    return this.register({ triggerStep, functionStep, actionStep });
+    return this.register({ triggerStep, actionStep });
   }
 
   /**
    * The name of the workflow, used in the Dashboard and Connect Portal.
    */
-  name: string = 'pipedrive integration enabled';
+  name: string = 'New Workflow';
 
   /**
    * A user-facing description of the workflow shown in the Connect Portal.
@@ -110,5 +113,5 @@ export default class extends Workflow<
   /**
    * This property is maintained by Paragon. Do not edit this property.
    */
-  readonly id: string = 'c8655757-dfc3-41c3-aaf6-c95bce48a150';
+  readonly id: string = '2a6b963d-7ce7-4758-887b-c2700a671028';
 }

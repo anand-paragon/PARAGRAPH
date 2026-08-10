@@ -1,6 +1,23 @@
-import { EventStep, IntegrationRequestStep, Workflow } from '@useparagon/core';
 import { IContext } from '@useparagon/core/execution';
+import {
+  Workflow,
+  CronStep,
+  DelayStep,
+  EventStep,
+  FunctionStep,
+  ConditionalStep,
+  FanOutStep,
+  ResponseStep,
+  RequestStep,
+  IntegrationEnabledStep,
+  UnselectedStep,
+  EndpointStep,
+  IntegrationRequestStep,
+  ICustomIntegration,
+  CustomTriggerStep,
+} from '@useparagon/core';
 import { IPersona } from '@useparagon/core/persona';
+import * as Operators from '@useparagon/core/operator';
 import { ConditionalInput } from '@useparagon/core/steps/library/conditional';
 import { IConnectUser, IPermissionContext } from '@useparagon/core/user';
 import {
@@ -9,8 +26,9 @@ import {
   ISlackIntegration,
 } from '@useparagon/integrations/slack';
 
-import event from '../../../events/archiveSevChannels';
 import personaMeta from '../../../persona.meta';
+import sharedInputs from '../inputs';
+import event from '../../../events/archiveSevChannels';
 
 /**
  * archive channels sev Workflow implementation

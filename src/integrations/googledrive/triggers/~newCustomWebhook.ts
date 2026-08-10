@@ -1,15 +1,18 @@
 import {
   ApiEndpointWebhookTrigger,
-  CustomTriggerSetupResponse,
   ICreateTriggerContext,
-  ICreateTriggerSetup,
-  IPayloadValidationContext,
-  ISetupTriggerResponseContext,
   ITeardownTriggerContext,
+  ICreateTriggerSetup,
   ITeardownTriggerSetup,
+  CustomTriggerSetupResponse,
   TriggerPayloadValidationOption,
+  ISetupTriggerResponseContext,
+  IPayloadValidationContext,
+  IProfileConfigContext,
+  IProviderIdContext,
 } from '@useparagon/core/triggers/customTrigger';
 import { InputResultMap } from '@useparagon/integrations/googledrive';
+import sharedInputs from '../inputs';
 
 /**
  * "New Custom Webhook" custom trigger
