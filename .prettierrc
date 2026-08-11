@@ -14,10 +14,6 @@
     "prettier-plugin-organize-imports"
   ],
   "organizeImportsSkipDestructiveCodeActions": true,
-  "importOrder": [
-    "^@useparagon/(.*)$",
-    "^[./]"
-  ],
   "importOrderSeparation": true,
   "importOrderCaseInsensitive": true
 }
