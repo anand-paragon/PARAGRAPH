@@ -51,7 +51,7 @@ export default class extends Workflow<
     });
 
     const actionStep = integration.actions.zohoCrmCreateRecord(
-      {},
+      { recordType: 'Accounts', Account_Name: `asfsaf` },
       {
         autoRetry: false,
         continueWorkflowOnError: false,
