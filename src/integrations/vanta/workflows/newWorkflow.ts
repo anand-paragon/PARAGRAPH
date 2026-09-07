@@ -23,8 +23,8 @@ import { IConnectUser, IPermissionContext } from '@useparagon/core/user';
 import {
   createInputs,
   InputResultMap,
-  ISlackIntegration,
-} from '@useparagon/integrations/slack';
+  IVantaIntegration,
+} from '@useparagon/integrations/vanta';
 
 import personaMeta from '../../../persona.meta';
 import sharedInputs from '../inputs';
@@ -33,7 +33,7 @@ import sharedInputs from '../inputs';
  * New Workflow Workflow implementation
  */
 export default class extends Workflow<
-  ISlackIntegration,
+  IVantaIntegration,
   IPersona<typeof personaMeta>,
   InputResultMap
 > {
@@ -41,19 +41,32 @@ export default class extends Workflow<
    * Define workflow steps and orchestration.
    */
   define(
-    integration: ISlackIntegration,
+    integration: IVantaIntegration,
     context: IContext<InputResultMap>,
     connectUser: IConnectUser<IPersona<typeof personaMeta>>,
   ) {
-    const triggerStep = new UnselectedStep();
+    const triggerStep = new CronStep({
+      cron: '0 0 9 */1 * *',
+      timezone: 'America/Los_Angeles',
+    });
 
-    triggerStep;
+    const integrationRequestStep = new IntegrationRequestStep({
+      autoRetry: false,
+      continueWorkflowOnError: false,
+      description: 'description',
+      method: 'GET',
+      url: ``,
+      params: {},
+      headers: {},
+    });
+
+    triggerStep.nextStep(integrationRequestStep);
 
     /**
      * Pass all steps used in the workflow to the `.register()`
      * function. The keys used in this function must remain stable.
      */
-    return this.register({ triggerStep });
+    return this.register({ triggerStep, integrationRequestStep });
   }
 
   /**
@@ -101,5 +114,5 @@ export default class extends Workflow<
   /**
    * This property is maintained by Paragon. Do not edit this property.
    */
-  readonly id: string = '23010295-2175-4fad-abcc-0b75c06e5e08';
+  readonly id: string = '83536363-036e-41a4-ac9c-8b0dca6c30ac';
 }

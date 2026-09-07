@@ -1,5 +1,7 @@
 import { IIntegrationConfig } from '@useparagon/core/integration';
 
+import { default as NewWorkflow } from './workflows/newWorkflow';
+
 /**
  * configuration for a vanta
  */
@@ -13,7 +15,7 @@ Our Vanta integration enables you to:
 • Manage policies in your Vanta account
 • Query test results in your Vanta account`,
   showWatermark: false,
-  workflowDisplayOrder: [],
+  workflowDisplayOrder: [NewWorkflow],
 };
 
 export default config;

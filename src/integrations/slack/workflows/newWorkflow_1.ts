@@ -47,13 +47,23 @@ export default class extends Workflow<
   ) {
     const triggerStep = new UnselectedStep();
 
-    triggerStep;
+    const integrationRequestStep = new IntegrationRequestStep({
+      autoRetry: false,
+      continueWorkflowOnError: false,
+      description: 'description',
+      method: 'GET',
+      url: ``,
+      params: {},
+      headers: {},
+    });
+
+    triggerStep.nextStep(integrationRequestStep);
 
     /**
      * Pass all steps used in the workflow to the `.register()`
      * function. The keys used in this function must remain stable.
      */
-    return this.register({ triggerStep });
+    return this.register({ triggerStep, integrationRequestStep });
   }
 
   /**
@@ -101,5 +111,5 @@ export default class extends Workflow<
   /**
    * This property is maintained by Paragon. Do not edit this property.
    */
-  readonly id: string = '23010295-2175-4fad-abcc-0b75c06e5e08';
+  readonly id: string = 'c4c44bed-a38c-46bb-bf1d-452d08c4b561';
 }
