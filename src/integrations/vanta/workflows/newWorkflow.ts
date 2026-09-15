@@ -55,7 +55,7 @@ export default class extends Workflow<
       continueWorkflowOnError: false,
       description: 'description',
       method: 'GET',
-      url: ``,
+      url: `v1/resources/api_endpoint_vulnerability_connectors?resourceId=6549fe7971e8f05cd435866b`,
       params: {},
       headers: {},
     });
