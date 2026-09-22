@@ -1,5 +1,7 @@
 import { IIntegrationConfig } from '@useparagon/core/integration';
 
+import { default as NewWorkflow } from './workflows/newWorkflow';
+
 /**
  * configuration for a imanage
  */
@@ -12,7 +14,7 @@ Our iManage integration enables you to:
 • Save files and documents in iManage   
 • Sync files and documents from iManage`,
   showWatermark: false,
-  workflowDisplayOrder: [],
+  workflowDisplayOrder: [NewWorkflow],
 };
 
 export default config;
